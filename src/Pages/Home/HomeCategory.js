@@ -26,8 +26,8 @@ const HomeCategory = () => {
                     homeCategory.map(hcategory => <div key={hcategory._id} className="card w-full md:w-96 bg-base-100 shadow-xl image-full">
                         <figure><img src={imgUrl} alt="Shoes" /></figure>
                         <div className="card-body">
-                            <h2 className="card-title">Samsung Phone</h2>
-                            <p>All the 2nd hand Phone you find here</p>
+                            <h2 className="card-title text-5xl">{hcategory.category}</h2>
+                            <p className='text-xl'>All the 2nd hand {hcategory.category} Phone you find here</p>
                             <div className="card-actions justify-center">
                                 <Link to={`/category/${hcategory._id}`} className="btn btn-primary">See ALl</Link>
                             </div>

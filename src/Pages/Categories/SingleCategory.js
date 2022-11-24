@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SingleCategory = ({ singleCategory }) => {
+const SingleCategory = ({ singleCategory, setBookingProduct }) => {
     console.log(singleCategory)
     const { battery,
         categoryName,
@@ -25,7 +25,9 @@ const SingleCategory = ({ singleCategory }) => {
                     <p>Used Time : {usedYear} year</p>
                     <p>Location : {location}</p>
                     <div className="card-actions">
-                        <button className="btn btn-primary">Book now</button>
+                        {/* <button className="btn btn-primary">Book now</button> */}
+                        {/* The button to open modal */}
+                        <label htmlFor="BookingProductModal" className="btn btn-primary" onClick={() => setBookingProduct(singleCategory)} >Book now</label>
                     </div>
                 </div>
             </div>
