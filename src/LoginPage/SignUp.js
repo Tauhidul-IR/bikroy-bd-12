@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthProvider';
 import googlelogo from '../images/google.png'
+import toast, { Toaster } from 'react-hot-toast';
 
 const SignUp = () => {
+    const { createUser, updateUser, googleSignIn } = useContext(AuthContext)
 
 
 
@@ -15,15 +18,15 @@ const SignUp = () => {
         console.log(name, email, password)
 
 
-        // createUser(email, password)
-        //     .then(result => {
-        //         const user = result.user;
-        //         console.log(user)
-        //         toast.success('SignUp Successfully..');
-        //         form.reset();
-        //         navigate(from, { replace: true })
-        //     })
-        //     .catch(eror => console.error(eror))
+        createUser(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                toast.success('SignUp Successfully..');
+                form.reset();
+                // navigate(from, { replace: true })
+            })
+            .catch(eror => console.error(eror))
     }
 
     const handleGoogle = () => {
@@ -31,7 +34,7 @@ const SignUp = () => {
         //     .then(result => {
         //         const user = result.user;
         //         console.log(user)
-        //         navigate(from, { replace: true })
+        //         // navigate(from, { replace: true })
         //         toast.success("login Successfully")
         //     })
         //     .catch(error => console.error(error))
