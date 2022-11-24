@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
 import googlelogo from '../images/google.png'
@@ -6,6 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const SignUp = () => {
     const { createUser, updateUser, googleSignIn } = useContext(AuthContext)
+    const [signInError, setSignError] = useState('');
 
 
 
@@ -17,16 +18,27 @@ const SignUp = () => {
         const password = form.password.value;
         console.log(name, email, password)
 
-
+        setSignError('');
         createUser(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user)
                 toast.success('SignUp Successfully..');
-                form.reset();
+                const userInfo = {
+                    displayName: name
+                }
+                updateUser(userInfo)
+                    .then(() => {
+
+                    })
+                    .catch(error => console.log(error))
+                // form.reset();
                 // navigate(from, { replace: true })
             })
-            .catch(eror => console.error(eror))
+            .catch(eror => {
+                console.error(eror)
+                setSignError(eror.message)
+            })
     }
 
     const handleGoogle = () => {
@@ -37,7 +49,10 @@ const SignUp = () => {
                 // navigate(from, { replace: true })
                 toast.success("login Successfully")
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+                console.log(error);
+                setSignError(error.message)
+            })
     }
 
 
@@ -68,6 +83,9 @@ const SignUp = () => {
                                 <input name='password' type="password" placeholder="password" className="input input-bordered" />
 
                             </div>
+                            {
+                                signInError && <p className='text-red-500'>{signInError}</p>
+                            }
                             <div className="form-control mt-6">
                                 <input className="btn btn-error" type="submit" value="SignUp" />
                             </div>

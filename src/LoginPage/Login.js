@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
 import googleLogo from '../images/google.png'
 import toast, { Toaster } from 'react-hot-toast';
@@ -7,6 +7,10 @@ import toast, { Toaster } from 'react-hot-toast';
 const Login = () => {
     const { loginUser, googleSignIn } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
+    const location = useLocation()
+    const navigate = useNavigate();
+
+    const from = location.state?.from?.pathname || '/';
 
 
     const handleSubmit = event => {
@@ -17,9 +21,6 @@ const Login = () => {
         const password = form.password.value;
         console.log(name, email, password)
 
-
-
-
         setLoginError('')
         loginUser(email, password)
             .then(result => {
@@ -27,6 +28,7 @@ const Login = () => {
                 console.log(user);
                 toast.success('login successSully')
                 form.reset();
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.log(error);
