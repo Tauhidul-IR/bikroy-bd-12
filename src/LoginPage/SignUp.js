@@ -30,14 +30,14 @@ const SignUp = () => {
     }
 
     const handleGoogle = () => {
-        // googleSignIn()
-        //     .then(result => {
-        //         const user = result.user;
-        //         console.log(user)
-        //         // navigate(from, { replace: true })
-        //         toast.success("login Successfully")
-        //     })
-        //     .catch(error => console.error(error))
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                // navigate(from, { replace: true })
+                toast.success("login Successfully")
+            })
+            .catch(error => console.error(error))
     }
 
 
