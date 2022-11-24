@@ -12,7 +12,7 @@ const Navbar = () => {
         <li><Link to={'/category'}>cetegory</Link></li>
 
         <li><Link to={'/login'}>Login</Link></li>
-        <li><Link to={'/login'}>SignOut</Link></li>
+        <li><Link to={'/signUp'}>SignUp</Link></li>
         {
             // user?.uid ? <>
             //     <li><Link to={'/dashboard'}>DashBoard</Link></li>
