@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from '../../Shared/Footer';
 import Banner from './Banner';
 import HomeCategory from './HomeCategory';
 import Subscribe from './Subscribe';
