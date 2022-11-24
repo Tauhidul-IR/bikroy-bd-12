@@ -25,7 +25,6 @@ const SingleCategory = ({ singleCategory, setBookingProduct }) => {
                     <p>Used Time : {usedYear} year</p>
                     <p>Location : {location}</p>
                     <div className="card-actions">
-                        {/* <button className="btn btn-primary">Book now</button> */}
                         {/* The button to open modal */}
                         <label htmlFor="BookingProductModal" className="btn btn-primary" onClick={() => setBookingProduct(singleCategory)} >Book now</label>
                     </div>

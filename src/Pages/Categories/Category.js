@@ -29,7 +29,7 @@ const Category = () => {
 
             </div>
             {
-                bookingProduct && <OpenProductModal bookingProduct={bookingProduct}></OpenProductModal>
+                bookingProduct && <OpenProductModal bookingProduct={bookingProduct} setBookingProduct={setBookingProduct}></OpenProductModal>
             }
 
         </div>

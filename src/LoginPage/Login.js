@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
 import googleLogo from '../images/google.png'
@@ -6,6 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
     const { loginUser, googleSignIn } = useContext(AuthContext);
+    const [loginError, setLoginError] = useState('');
 
 
     const handleSubmit = event => {
@@ -16,14 +17,20 @@ const Login = () => {
         const password = form.password.value;
         console.log(name, email, password)
 
+
+
+
+        setLoginError('')
         loginUser(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
                 toast.success('login successSully')
                 form.reset();
-
-
+            })
+            .catch(error => {
+                console.log(error);
+                setLoginError(error.message)
             })
 
 
@@ -37,7 +44,10 @@ const Login = () => {
                 // navigate(from, { replace: true })
                 toast.success("login Successfully")
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+                console.error(error)
+                setLoginError(error.message)
+            })
     }
 
 
@@ -76,9 +86,13 @@ const Login = () => {
                                 <input name='password' type="password" placeholder="password" className="input input-bordered" />
 
                             </div>
+                            {
+                                loginError && <p className='text-red-500'>{loginError}</p>
+                            }
                             <div className="form-control mt-6">
                                 <input className="btn btn-error" type="submit" value="Login" />
                             </div>
+
                         </form>
                         <div className='text-center'>
                             <h2 className='pb-4 text-xl'>Login with</h2>

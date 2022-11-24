@@ -1,26 +1,27 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider';
 
-const OpenProductModal = ({ bookingProduct }) => {
+const OpenProductModal = ({ bookingProduct, setBookingProduct }) => {
     const { user } = useContext(AuthContext);
     const { battery, categoryName, color, img, location, name, newPrice, price, ram, size, usedYear } = bookingProduct;
 
     const handleBooking = (event) => {
-        // event.preventDefault();
-        // const form = event.target;
-        // const email = form.email.value;
-        // const phone = form.phone.value;
-        // const meetingLocation = form.meetingLocation.value;
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const phone = form.phone.value;
+        const meetingLocation = form.meetingLocation.value;
 
 
-        // const booking = {
-        //     categoryName: categoryName,
-        //     name: name,
-        //     price,
-        //     email,
-        //     phone,
-        //     meetingLocation: meetingLocation,
-        // }
+        const booking = {
+            categoryName: categoryName,
+            name: name,
+            price,
+            email,
+            phone,
+            meetingLocation: meetingLocation,
+        }
+        setBookingProduct(null)
 
     }
 
