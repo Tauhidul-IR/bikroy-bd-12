@@ -6,6 +6,7 @@ import SignUp from '../LoginPage/SignUp';
 import Blogs from '../Pages/Blogs/Blogs';
 import Category from '../Pages/Categories/Category';
 import DashBoard from '../Pages/DashBoard/DashBoard';
+import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/Home/Home';
 import PrivateRoute from './PrivateRoute';
 
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
@@ -39,7 +41,8 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>
+        element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
+        errorElement: <ErrorPage></ErrorPage>,
     }
 ])
 
