@@ -3,7 +3,7 @@ import React from 'react';
 const DashBoard = () => {
     return (
         <div>
-            cooming
+            <h1>This is DashBorad of BIKROYBD</h1>
         </div>
     );
 };
