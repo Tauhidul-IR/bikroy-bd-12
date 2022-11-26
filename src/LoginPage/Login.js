@@ -21,31 +21,6 @@ const Login = () => {
     }
 
 
-    // const handleSubmit = event => {
-    //     event.preventDefault();
-    //     const form = event.target;
-    //     const name = form.name.value;
-    //     const email = form.email.value;
-    //     const password = form.password.value;
-    //     console.log(name, email, password)
-
-    //     setLoginError('')
-    //     loginUser(email, password)
-    //         .then(result => {
-    //             const user = result.user;
-    //             console.log(user);
-    //             toast.success('login successSully')
-    //             form.reset();
-    //             navigate(from, { replace: true });
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //             setLoginError(error.message)
-    //         })
-
-
-    // }
-
 
     const handleLogin = data => {
         // console.log(data)
@@ -70,6 +45,7 @@ const Login = () => {
                 console.log(user)
                 // navigate(from, { replace: true })
                 toast.success("login Successfully")
+                setLoginUserEmail(user?.email)
             })
             .catch(error => {
                 console.error(error)

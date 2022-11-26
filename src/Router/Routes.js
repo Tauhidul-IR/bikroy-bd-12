@@ -6,6 +6,7 @@ import Login from '../LoginPage/Login';
 import SignUp from '../LoginPage/SignUp';
 import Blogs from '../Pages/Blogs/Blogs';
 import Category from '../Pages/Categories/Category';
+import AllUsers from '../Pages/DashBoard/AllUsers/AllUsers';
 import DashBoard from '../Pages/DashBoard/DashBoard/DashBoard';
 import Myorder from '../Pages/DashBoard/MyOrder/Myorder';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/myorder',
                 element: <Myorder></Myorder>
+            },
+            {
+                path: '/dashboard/allusers',
+                element: <AllUsers></AllUsers>
             }
         ]
     }
