@@ -3,39 +3,64 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
 import googleLogo from '../images/google.png'
 import toast, { Toaster } from 'react-hot-toast';
+import { useForm } from 'react-hook-form';
+import useToken from '../hooks/useToken';
 
 const Login = () => {
+    const { register, formState: { errors }, handleSubmit } = useForm();
     const { loginUser, googleSignIn } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [token] = useToken(loginUserEmail);
     const location = useLocation()
     const navigate = useNavigate();
 
     const from = location.state?.from?.pathname || '/';
+    if (token) {
+        navigate(from, { replace: true })
+    }
 
 
-    const handleSubmit = event => {
-        event.preventDefault();
-        const form = event.target;
-        const name = form.name.value;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(name, email, password)
+    // const handleSubmit = event => {
+    //     event.preventDefault();
+    //     const form = event.target;
+    //     const name = form.name.value;
+    //     const email = form.email.value;
+    //     const password = form.password.value;
+    //     console.log(name, email, password)
 
-        setLoginError('')
-        loginUser(email, password)
+    //     setLoginError('')
+    //     loginUser(email, password)
+    //         .then(result => {
+    //             const user = result.user;
+    //             console.log(user);
+    //             toast.success('login successSully')
+    //             form.reset();
+    //             navigate(from, { replace: true });
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //             setLoginError(error.message)
+    //         })
+
+
+    // }
+
+
+    const handleLogin = data => {
+        // console.log(data)
+        setLoginError('');
+        loginUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
-                toast.success('login successSully')
-                form.reset();
-                navigate(from, { replace: true });
+                setLoginUserEmail(data.email)
+
             })
             .catch(error => {
-                console.log(error);
+                console.error(error.message)
                 setLoginError(error.message)
+
             })
-
-
     }
 
     const handleGoogle = () => {
@@ -57,56 +82,61 @@ const Login = () => {
 
 
     return (
-        <div>
-            <div className='container'>
-                <div className="hero w-full my-20">
+        <div className='h-[800px] flex justify-center items-center'>
+            <div className='w-96 p-7'>
+                <h2 className='text-xl text-center font-bold'>Login</h2>
+                {/* -----------------Start Form------------------ */}
+                <form onSubmit={handleSubmit(handleLogin)}>
+                    {/* --------------email---------------------------------- */}
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label"><span className="label-text font-bold">Email</span></label>
+                        <input
+                            {...register("email", {
+                                required: "Email Address is required"
+                            })}
+                            type="email" className="input input-bordered w-full max-w-xs" />
 
-                    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 py-10">
-                        <h1 className="text-5xl font-bold text-center">Login</h1>
-
-
-                        {/* toggle btn for user/admin */}
-                        {/* <div className="form-control w-52">
-                            <label className="cursor-pointer label">
-                                <span className="label-text">Remember me</span>
-                                <input type="checkbox" className="toggle toggle-primary" checked />
-                            </label>
-                        </div> */}
-
-                        {/* login form */}
-                        <form onSubmit={handleSubmit} className="card-body">
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Email</span>
-                                </label>
-                                <input type="email" name='email' placeholder="email" className="input input-bordered" />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input name='password' type="password" placeholder="password" className="input input-bordered" />
-
-                            </div>
-                            {
-                                loginError && <p className='text-red-500'>{loginError}</p>
-                            }
-                            <div className="form-control mt-6">
-                                <input className="btn btn-neutral" type="submit" value="Login" />
-                            </div>
-
-                        </form>
-                        <div className='text-center'>
-                            <h2 className='pb-4 text-xl'>Login with</h2>
-                            <div className='flex justify-around py-4'>
-                                {/* <Link ><img onClick={handleGoogle} className='w-8 h-8' src={googleLogo} alt="" /></Link> */}
-                                <button onClick={handleGoogle} className='btn btn-outline my-4'>CONTINUE WITH GOOGLE</button>
-                            </div>
-                        </div>
-                        <p className='text-center'>New to Genius Car <Link className='text-orange-500 font-bold' to={'/signup'}>Sign Up</Link></p>
+                        {errors.email && <p className='text-red-700'>{errors.email?.message}</p>}
                     </div>
+                    {/* --------------email---------------------------------- */}
 
+
+
+
+                    {/* --------------password---------------------------------- */}
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label"><span className="label-text font-bold">Password</span></label>
+                        <input
+                            {...register("password", {
+                                required: "Password Required",
+                                minLength: { value: 6, message: 'Password must be 6 characters or more.!!!' }
+                            })}
+                            type="password" className="input input-bordered w-full max-w-xs" />
+                        {errors.password && <p className='text-red-700'>{errors.password?.message}</p>}
+                        {/* forget password */}
+                        <label className="label"><span className="label-text mb-5"><Link to={'/resetPassword'}>Forget Password</Link></span></label>
+                    </div>
+                    {/* --------------password---------------------------------- */}
+
+
+                    {/* --------------Login Btn---------------------------------- */}
+                    <input className='btn btn-neutral w-full' type="submit" value={'Login'} />
+                </form>
+
+                {/* error display------------------------- */}
+                <div>
+                    {
+                        loginError && <p className='text-red-600'>{loginError}</p>
+                    }
                 </div>
+                {/* -------------End Form-------------- */}
+
+
+                <p className='font-semibold my-5'>New to Doctors Portal? <Link to={'/signUp'} className='text-secondary'>Create new account</Link></p>
+                <div className="divider">OR</div>
+                {/* -------------Google Login-------------- */}
+                <button onClick={handleGoogle} className='btn btn-outline w-full my-4'>CONTINUE WITH GOOGLE</button>
+                {/* -------------Google Login-------------- */}
             </div>
         </div>
     );
