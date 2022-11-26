@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import OpenProductModal from './OpenProductModal/OpenProductModal';
 import SingleCategory from './SingleCategory';
-import {
-    useQuery,
-    useMutation,
-    useQueryClient,
-    QueryClient,
-    QueryClientProvider,
-} from '@tanstack/react-query'
-import Loading from '../../Loading/Loading';
+// import {
+//     useQuery,
+//     useMutation,
+//     useQueryClient,
+//     QueryClient,
+//     QueryClientProvider,
+// } from '@tanstack/react-query'
+// import Loading from '../../Loading/Loading';
 
 const Category = () => {
     const [categoryService, setCategoryService] = useState([]);
@@ -17,7 +17,7 @@ const Category = () => {
 
 
     const service = useLoaderData()
-    // console.log(categoryService)
+
 
 
     useEffect(() => {

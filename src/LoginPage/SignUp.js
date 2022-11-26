@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
 import googlelogo from '../images/google.png'
 import toast, { Toaster } from 'react-hot-toast';
@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const SignUp = () => {
     const { createUser, updateUser, googleSignIn } = useContext(AuthContext)
     const [signInError, setSignError] = useState('');
+    const navigate = useNavigate();
 
 
 
@@ -29,15 +30,15 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-
+                        navigate('/');
                     })
                     .catch(error => console.log(error))
                 // form.reset();
                 // navigate(from, { replace: true })
             })
-            .catch(eror => {
-                console.error(eror)
-                setSignError(eror.message)
+            .catch(error => {
+                console.error(error)
+                setSignError(error.message)
             })
     }
 

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider';
+import toast, { Toaster } from 'react-hot-toast';
 
 const OpenProductModal = ({ bookingProduct, setBookingProduct }) => {
     const { user } = useContext(AuthContext);
@@ -9,9 +10,10 @@ const OpenProductModal = ({ bookingProduct, setBookingProduct }) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
+        const userName = form.userName.value;
         const phone = form.phone.value;
         const meetingLocation = form.meetingLocation.value;
-
+        console.log(email);
 
         const booking = {
             categoryName: categoryName,
@@ -20,8 +22,29 @@ const OpenProductModal = ({ bookingProduct, setBookingProduct }) => {
             email,
             phone,
             meetingLocation: meetingLocation,
+            userName
         }
+
+        fetch('http://localhost:5000/phoneBookings', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                if (data.acknowledged) {
+                    setBookingProduct(null)
+                    toast.success('Booking Done')
+                }
+            })
+
+
+
         setBookingProduct(null)
+        console.log(booking);
 
     }
 
@@ -38,10 +61,10 @@ const OpenProductModal = ({ bookingProduct, setBookingProduct }) => {
                     <label htmlFor="BookingProductModal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="text-lg font-bold">{name}</h3>
                     <form onSubmit={handleBooking} className='grid grid-cols-1 gap-3 mt-10'>
-                        <input type="text" value={user?.displayName} disabled className="input input-bordered w-full" />
-                        <input name='patientName' type="text" defaultValue={user?.email} readOnly placeholder="Your Name" className="input input-bordered w-full" />
-                        <input name='email' type="email" defaultValue={name} disabled placeholder="Email" className="input input-bordered w-full" />
-                        <input name='email' type="email" defaultValue={price} disabled placeholder="Email" className="input input-bordered w-full" />
+                        <input name='userName' type="text" value={user?.displayName} disabled className="input input-bordered w-full" />
+                        <input name='email' type="email" defaultValue={user?.email} readOnly placeholder="Your Name" className="input input-bordered w-full" />
+                        <input name='name' type="text" defaultValue={name} disabled placeholder="Email" className="input input-bordered w-full" />
+                        <input name='price' type="text" defaultValue={price} disabled placeholder="Email" className="input input-bordered w-full" />
                         <input name='phone' type="text" placeholder="Phone Number" className="input input-bordered w-full" />
                         <input name='meetingLocation' type="text" placeholder="Meeting Location" className="input input-bordered w-full" />
                         <br />
