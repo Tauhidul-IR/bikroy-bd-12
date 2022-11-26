@@ -28,13 +28,17 @@ const Myorder = () => {
 
     return (
         <div>
-            <h1>My Order</h1>
-            <div className="overflow-x-auto">
+            <h1 className='text-3xl font-bold my-5'>My Orders</h1>
+
+            <div className="overflow-x-auto w-full">
                 <table className="table w-full">
 
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>
+                                index
+                            </th>
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Price</th>
                             <th>Status</th>
@@ -42,19 +46,33 @@ const Myorder = () => {
                     </thead>
                     <tbody>
 
+
                         {
                             phoneBookings &&
                             phoneBookings.map((bookingPhone, i) => <tr key={bookingPhone._id}>
-                                <th>{i + 1}</th>
-                                <td>{bookingPhone?.name}</td>
-                                <td>{bookingPhone?.price}</td>
-                                <td> <button>pay</button></td>
+                                <td>{i + 1}</td>
+                                <td>
+                                    <div className="flex items-center space-x-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle w-12 h-12">
+                                                <img src={bookingPhone?.img} alt="Avatar Tailwind CSS Component" />
+                                            </div>
+                                        </div>
 
+                                    </div>
+                                </td>
+                                <td>
+                                    {bookingPhone?.name}
+                                </td>
+                                <td> {bookingPhone?.price}</td>
+                                <th>
+                                    <button className="btn btn-primary btn-xs">Pay</button>
+                                </th>
                             </tr>)
                         }
-                        {/*  */}
-
                     </tbody>
+
+
                 </table>
             </div>
         </div>
@@ -62,3 +80,4 @@ const Myorder = () => {
 };
 
 export default Myorder;
+
