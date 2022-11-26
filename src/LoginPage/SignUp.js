@@ -1,45 +1,57 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
-import googlelogo from '../images/google.png'
 import toast, { Toaster } from 'react-hot-toast';
+import { useForm } from 'react-hook-form';
 
 const SignUp = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, updateUser, googleSignIn } = useContext(AuthContext)
-    const [signInError, setSignError] = useState('');
+    const [signUpError, setSignUpError] = useState(null)
     const navigate = useNavigate();
 
 
-
-    const handleSubmit = event => {
-        event.preventDefault();
-        const form = event.target;
-        const name = form.name.value;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(name, email, password)
-
-        setSignError('');
-        createUser(email, password)
+    const handleSignUp = data => {
+        console.log(data)
+        setSignUpError('')
+        createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                toast.success('SignUp Successfully..');
+                toast.success("User Create SuccessFully")
+                //update user
                 const userInfo = {
-                    displayName: name
+                    displayName: data.name
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        navigate('/');
+                        saveUser(data.name, data.email)
+                        // navigate('/');
                     })
-                    .catch(error => console.log(error))
-                // form.reset();
-                // navigate(from, { replace: true })
+                    .catch(error => console.error(error))
             })
             .catch(error => {
                 console.error(error)
-                setSignError(error.message)
+                setSignUpError(error.message)
             })
+    }
+
+
+    const saveUser = (name, email) => {
+        const user = { name, email };
+        fetch('http://localhost:5000/users', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                // setCreatedUserEmail(email)
+                navigate('/');
+            })
+            .catch(error => console.error(error))
     }
 
     const handleGoogle = () => {
@@ -52,55 +64,84 @@ const SignUp = () => {
             })
             .catch(error => {
                 console.log(error);
-                setSignError(error.message)
+                setSignUpError(error.message)
             })
     }
 
 
     return (
-        <div>
-            <div className='container'>
-                <div className="hero w-full my-20">
+        <div className='h-[800px] flex justify-center items-center'>
+            <div className='w-96 p-7'>
+                <h2 className='text-xl text-center font-bold'>Sign Up</h2>
+                {/* -----------------Start Form------------------ */}
+                <form onSubmit={handleSubmit(handleSignUp)}>
+                    {/* --------------Name---------------------------------- */}
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label"><span className="label-text font-bold">Name</span></label>
+                        <input
+                            {...register("name", {
+                                required: 'Name Must Given.'
+                            })}
+                            type="text" className="input input-bordered w-full max-w-xs" />
+                        {errors.name && <p className='text-red-500'>{errors.name?.message}</p>}
 
-                    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 py-10">
-                        <h1 className="text-5xl font-bold text-center">SignUp</h1>
-                        <form onSubmit={handleSubmit} className="card-body">
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Your Name</span>
-                                </label>
-                                <input type="text" name='name' placeholder="Name" className="input input-bordered" />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Email</span>
-                                </label>
-                                <input type="email" name='email' placeholder="email" className="input input-bordered" />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input name='password' type="password" placeholder="password" className="input input-bordered" />
-
-                            </div>
-                            {
-                                signInError && <p className='text-red-500'>{signInError}</p>
-                            }
-                            <div className="form-control mt-6">
-                                <input className="btn btn-error" type="submit" value="SignUp" />
-                            </div>
-                        </form>
-                        <div className='text-center'>
-                            <h2 className='pb-4 text-xl'>SignUp with</h2>
-                            <div className='flex justify-around py-4'>
-                                <Link ><img onClick={handleGoogle} className='w-8 h-8' src={googlelogo} alt="" /></Link>
-                            </div>
-                        </div>
-                        <p className='text-center'>Already have an Account <Link className='text-orange-500 font-bold' to={'/login'}>Login</Link></p>
                     </div>
+                    {/* --------------Name---------------------------------- */}
 
-                </div>
+
+
+
+                    {/* --------------email---------------------------------- */}
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label"><span className="label-text font-bold">Email</span></label>
+                        <input
+                            {...register("email", {
+                                required: "Email is Required"
+                            })}
+                            type="email" className="input input-bordered w-full max-w-xs" />
+                        {errors.email && <p className='text-red-500'>{errors.email?.message}</p>}
+                    </div>
+                    {/* --------------email---------------------------------- */}
+
+
+
+
+
+                    {/* --------------password---------------------------------- */}
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label"><span className="label-text font-bold">Password</span></label>
+                        <input
+                            {...register("password", {
+                                required: "Password is Required",
+                                minLength: { value: 6, message: 'Password must be 6 characters or more.!!!' },
+                                // regular expression
+                                // pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/, message: "Password Must be Strong" }
+                            })}
+                            type="password" className="input input-bordered w-full max-w-xs" />
+                        {errors.password && <p className='text-red-500'>{errors.password?.message}</p>}
+                    </div>
+                    {/* --------------password---------------------------------- */}
+
+
+                    {/* --------------Submit Btn---------------------------------- */}
+                    <input className='btn btn-neutral w-full mt-5' type="submit" value={'Sign Up'} />
+                    {/* display Error */}
+                    <div>
+                        {
+                            signUpError && <p className='text-red-600'>{signUpError}</p>
+                        }
+                    </div>
+                </form>
+                {/* -------------End Form-------------- */}
+
+
+
+
+                <p className='font-semibold my-5'>Already have an Account? <Link to={'/login'} className='text-secondary'>Login</Link></p>
+                <div className="divider">OR</div>
+                {/* -------------Google Sign in-------------- */}
+                <button onClick={handleGoogle} className='btn btn-outline w-full my-4'>CONTINUE WITH GOOGLE</button>
+                {/* -------------Google Sign in-------------- */}
             </div>
         </div>
     );

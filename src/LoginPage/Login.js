@@ -92,14 +92,15 @@ const Login = () => {
                                 loginError && <p className='text-red-500'>{loginError}</p>
                             }
                             <div className="form-control mt-6">
-                                <input className="btn btn-error" type="submit" value="Login" />
+                                <input className="btn btn-neutral" type="submit" value="Login" />
                             </div>
 
                         </form>
                         <div className='text-center'>
                             <h2 className='pb-4 text-xl'>Login with</h2>
                             <div className='flex justify-around py-4'>
-                                <Link ><img onClick={handleGoogle} className='w-8 h-8' src={googleLogo} alt="" /></Link>
+                                {/* <Link ><img onClick={handleGoogle} className='w-8 h-8' src={googleLogo} alt="" /></Link> */}
+                                <button onClick={handleGoogle} className='btn btn-outline my-4'>CONTINUE WITH GOOGLE</button>
                             </div>
                         </div>
                         <p className='text-center'>New to Genius Car <Link className='text-orange-500 font-bold' to={'/signup'}>Sign Up</Link></p>
