@@ -46,12 +46,12 @@ const AddProduct = () => {
                     const product = {
                         name: data.name,
                         email: data.email,
-                        image: imgData.data.url,
+                        img: imgData.data.url,
                         price: data.price,
                         condition: data.condition,
                         phone: data.phone,
                         publishDate: data.publishDate,
-                        category: data.category,
+                        categoryName: data.category,
                     }
                     //save doctor to the DB
                     fetch('http://localhost:5000/addProduct', {
