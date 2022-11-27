@@ -9,10 +9,13 @@ import Category from '../Pages/Categories/Category';
 import AllUsers from '../Pages/DashBoard/AllUsers/AllUsers';
 import DashBoard from '../Pages/DashBoard/DashBoard/DashBoard';
 import Myorder from '../Pages/DashBoard/MyOrder/Myorder';
+import AddProduct from '../Pages/DashBoard/Seller/AddProduct';
+import MyProduct from '../Pages/DashBoard/Seller/MyProduct';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/Home/Home';
 import AdminRoute from './AdminRoute';
 import PrivateRoute from './PrivateRoute';
+import SellerRoute from './SellerRoute';
 
 const router = createBrowserRouter([
     {
@@ -59,6 +62,14 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/allusers',
                 element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+            },
+            {
+                path: '/dashboard/addProduct',
+                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
+            },
+            {
+                path: '/dashboard/myProduct',
+                element: <SellerRoute><MyProduct></MyProduct></SellerRoute>
             }
         ]
     }
