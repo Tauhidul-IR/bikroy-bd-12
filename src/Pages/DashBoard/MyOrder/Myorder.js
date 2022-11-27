@@ -7,6 +7,7 @@ import {
     QueryClient,
     QueryClientProvider,
 } from '@tanstack/react-query'
+import { Link } from 'react-router-dom';
 // import Loading from '../../Loading/Loading';
 
 const Myorder = () => {
@@ -70,7 +71,16 @@ const Myorder = () => {
                                 </td>
                                 <td> {bookingPhone?.price}</td>
                                 <th>
-                                    <button className="btn btn-primary btn-xs">Pay</button>
+                                    {
+                                        !bookingPhone?.paid && <Link to={`/dashboard/payment/${bookingPhone._id}`}>
+                                            <button className='btn btn-primary btn-sm'>
+                                                Pay
+                                            </button>
+                                        </Link>
+                                    }
+                                    {
+                                        bookingPhone?.paid && <span className='text-primary'>Paid</span>
+                                    }
                                 </th>
                             </tr>)
                         }
