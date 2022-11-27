@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery, } from '@tanstack/react-query'
 import toast, { Toaster } from 'react-hot-toast';
+import ConfirmModal from '../../../Shared/ComfirmModal/ConfirmModal';
 
 const AllUsers = () => {
+    const [deletingUser, setDeletingUser] = useState(null)
+
+    const closeModal = () => {
+        setDeletingUser(null);
+    }
+
 
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
@@ -12,6 +19,27 @@ const AllUsers = () => {
             return data;
         }
     });
+
+
+
+    const handleDeleteUser = user => {
+        console.log(user)
+        fetch(`http://localhost:5000/users/${user._id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.deletedCount > 0) {
+
+                    refetch();
+                    toast.success(`Doctor ${user.name} Delete SuccessFully`)
+                }
+            })
+    }
 
 
 
@@ -60,13 +88,20 @@ const AllUsers = () => {
                                         user?.userType !== "Seller" && user?.role !== "admin" && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary'>Make Seller</button>
                                     }
                                 </td>
-                                <td><button className='btn btn-primary'>X</button></td>
+                                <td>
+
+                                    {/* The button to open modal */}
+                                    <label onClick={() => { setDeletingUser(user) }} htmlFor="confirmation-modal" className="btn btn-danger">X</label>
+                                </td>
 
                             </tr>)
                         }
                     </tbody>
                 </table>
             </div>
+            {
+                deletingUser && <ConfirmModal title={`Are you want to delete?`} closeModal={closeModal} handleDeleteUser={handleDeleteUser} modalDAta={deletingUser}></ConfirmModal>
+            }
         </div>
     );
 };
