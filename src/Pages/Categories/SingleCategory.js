@@ -4,6 +4,7 @@ const SingleCategory = ({ singleCategory, setBookingProduct }) => {
     console.log(singleCategory)
     const { battery,
         categoryName,
+        sellerImg,
         color,
         img,
         location,
@@ -24,6 +25,12 @@ const SingleCategory = ({ singleCategory, setBookingProduct }) => {
                     <p>Current price : {newPrice}</p>
                     <p>Used Time : {usedYear} year</p>
                     <p>Location : {location}</p>
+                    <div className="avatar indicator">
+                        <span className="indicator-item badge badge-success"></span>
+                        <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                            <img src={sellerImg} alt='no img' />
+                        </div>
+                    </div>
                     <div className="card-actions">
                         {/* The button to open modal */}
                         <label htmlFor="BookingProductModal" className="btn btn-primary" onClick={() => setBookingProduct(singleCategory)} >Book now</label>
