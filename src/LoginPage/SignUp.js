@@ -20,7 +20,7 @@ const SignUp = () => {
 
 
     const handleSignUp = data => {
-        console.log(data)
+        console.log(data.userType)
         setSignUpError('')
         createUser(data.email, data.password)
             .then(result => {
@@ -33,7 +33,7 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        saveUser(data.name, data.email)
+                        saveUser(data.name, data.email, data.userType)
                         // navigate('/');
                     })
                     .catch(error => console.error(error))
@@ -45,8 +45,8 @@ const SignUp = () => {
     }
 
 
-    const saveUser = (name, email) => {
-        const user = { name, email };
+    const saveUser = (name, email, userType) => {
+        const user = { name, email, userType };
         fetch('http://localhost:5000/users', {
             method: "POST",
             headers: {
@@ -136,6 +136,18 @@ const SignUp = () => {
                         {errors.password && <p className='text-red-500'>{errors.password?.message}</p>}
                     </div>
                     {/* --------------password---------------------------------- */}
+
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Select Type</span>
+
+                        </label>
+                        <select {...register("userType")} className="select select-bordered">
+                            <option >Seller</option>
+                            <option>Buyer</option>
+                        </select>
+
+                    </div>
 
 
                     {/* --------------Submit Btn---------------------------------- */}
