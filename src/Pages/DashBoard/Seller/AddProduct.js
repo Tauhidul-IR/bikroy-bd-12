@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import Loading from '../../../Loading/Loading';
+import { AuthContext } from '../../../Context/AuthProvider';
 
 const AddProduct = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const { user } = useContext(AuthContext)
     // const imageHostKey = process.env.REACT_APP_IMGBB_TOKEN;
     const navigate = useNavigate();
     const { data: categories = [], isLoading } = useQuery({
@@ -44,8 +46,12 @@ const AddProduct = () => {
                     const product = {
                         name: data.name,
                         email: data.email,
-                        specialty: data.specialty,
-                        image: imgData.data.url
+                        image: imgData.data.url,
+                        price: data.price,
+                        condition: data.condition,
+                        phone: data.phone,
+                        publishDate: data.publishDate,
+                        category: data.category,
                     }
                     //save doctor to the DB
                     fetch('http://localhost:5000/addProduct', {
@@ -78,6 +84,19 @@ const AddProduct = () => {
         <div>
             <h1>Add a product</h1>
             <form onSubmit={handleSubmit(handleAddProduct)}>
+                {/* --------------email---------------------------------- */}
+                <div className="form-control w-full max-w-xs">
+                    <label className="label"><span className="label-text font-bold">Seller Email</span></label>
+                    <input
+                        {...register("email", {
+                            required: "Email is Required"
+                        })}
+                        type="email" className="input input-bordered w-full max-w-xs" defaultValue={user?.email} readOnly />
+                    {errors.email && <p className='text-red-500'>{errors.email?.message}</p>}
+                </div>
+                {/* --------------email---------------------------------- */}
+
+
                 {/* --------------Name---------------------------------- */}
                 <div className="form-control w-full max-w-xs">
                     <label className="label"><span className="label-text font-bold">Name</span></label>
@@ -160,7 +179,7 @@ const AddProduct = () => {
 
 
 
-                {/* --------------Specialty---------------------------------- */}
+                {/* --------------category---------------------------------- */}
                 <div className="form-control w-full max-w-xs">
                     <label className="label"><span className="label-text font-bold">Category</span></label>
                     <select {...register("category", {
@@ -174,7 +193,7 @@ const AddProduct = () => {
 
                 </div>
                 {/* ----------
-                {/* --------------Specialty---------------------------------- */}
+                {/* --------------category---------------------------------- */}
 
 
                 {/* --------------Upload photo---------------------------------- */}
@@ -192,7 +211,7 @@ const AddProduct = () => {
 
 
                 {/* --------------Submit Btn---------------------------------- */}
-                <input className='btn btn-neutral w-full mt-5' type="submit" value={'Add Product'} />
+                <input className='btn btn-neutral mt-5' type="submit" value={'Add Product'} />
                 {/* display Error */}
                 <div>
                     {
