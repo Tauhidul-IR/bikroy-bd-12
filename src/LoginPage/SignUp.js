@@ -4,6 +4,7 @@ import { AuthContext } from '../Context/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import useToken from '../hooks/useToken';
+import { data } from 'autoprefixer';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -74,6 +75,7 @@ const SignUp = () => {
                 console.log(user)
                 // navigate(from, { replace: true })
                 toast.success("login Successfully")
+                setCreatedUserEmail(data.email)
             })
             .catch(error => {
                 console.log(error);

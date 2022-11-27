@@ -45,13 +45,36 @@ const Login = () => {
                 console.log(user)
                 // navigate(from, { replace: true })
                 toast.success("login Successfully")
-                setLoginUserEmail(user?.email)
+                // setLoginUserEmail(user?.email)
+                setLoginUserEmail(user.email)
             })
             .catch(error => {
                 console.error(error)
                 setLoginError(error.message)
             })
     }
+
+
+
+
+
+    // const saveUser = (name, email) => {
+    //     const user = { name, email };
+    //     fetch('http://localhost:5000/users', {
+    //         method: "POST",
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify(user)
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setLoginUserEmail(email)
+    //             // getUserToken(email)
+    //             // navigate('/');
+    //         })
+    //         .catch(error => console.error(error))
+    // }
 
 
 
