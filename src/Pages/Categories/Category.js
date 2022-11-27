@@ -1,46 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+import Loading from '../../Loading/Loading';
 import OpenProductModal from './OpenProductModal/OpenProductModal';
 import SingleCategory from './SingleCategory';
-// import {
-//     useQuery,
-//     useMutation,
-//     useQueryClient,
-//     QueryClient,
-//     QueryClientProvider,
-// } from '@tanstack/react-query'
-// import Loading from '../../Loading/Loading';
+
+import {
+    useQuery,
+} from '@tanstack/react-query'
 
 const Category = () => {
-    const [categoryService, setCategoryService] = useState([]);
     const [bookingProduct, setBookingProduct] = useState(null)
 
 
     const service = useLoaderData()
 
 
+    const { data: categoryService = [], isLoading } = useQuery({
+        queryKey: ['categoryService', service?.category],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/allCategoryProducts?categoryName=${service?.category}`)
+            const data = await res.json();
+            return data;
+        }
+    })
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/allCategoryProducts?categoryName=${service?.category}`)
-            .then(res => res.json())
-            .then(data => setCategoryService(data))
-    }, [service?.category])
-
-
-
-    //implement last time
-    // const { data: categoryService = [], isLoading } = useQuery({
-    //     queryKey: ['categoryService', service?.category],
-    //     queryFn: async () => {
-    //         const res = await fetch(`http://localhost:5000/allCategoryProducts?categoryName=${service?.category}`)
-    //         const data = await res.json();
-    //         return data;
-    //     }
-    // })
-
-    // if (isLoading) {
-    //     return <Loading></Loading>
-    // }
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
 
     return (
