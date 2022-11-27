@@ -34,6 +34,7 @@ const MyProduct = () => {
                             <th>Price</th>
                             <th>Status</th>
                             <th>Action</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,12 +58,15 @@ const MyProduct = () => {
                                     {product?.name}
                                 </td>
                                 <td> {product?.price}</td>
-                                <th>
+                                <td>
+                                    <button className="btn btn-primary btn-xs">Available</button>
+                                </td>
+                                <td>
                                     <button className="btn btn-primary btn-xs">advertise</button>
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     <button className="btn btn-primary btn-xs">X</button>
-                                </th>
+                                </td>
                             </tr>)
                         }
                     </tbody>

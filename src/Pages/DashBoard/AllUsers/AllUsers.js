@@ -15,7 +15,7 @@ const AllUsers = () => {
 
 
 
-    const handleMakeAdmin = id => {
+    const handleMakeSeller = id => {
         fetch(`http://localhost:5000/users/admin/${id}`, {
             method: 'PUT',
             headers: {
@@ -45,7 +45,7 @@ const AllUsers = () => {
                             <th></th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Admin</th>
+                            <th>Status</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -57,7 +57,7 @@ const AllUsers = () => {
                                 <td>{user?.email}</td>
                                 <td>
                                     {
-                                        user?.role !== "admin" && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>
+                                        user?.userType !== "Seller" && user?.role !== "admin" && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary'>Make Seller</button>
                                     }
                                 </td>
                                 <td><button className='btn btn-primary'>X</button></td>
