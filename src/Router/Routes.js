@@ -6,6 +6,7 @@ import Login from '../LoginPage/Login';
 import SignUp from '../LoginPage/SignUp';
 import Blogs from '../Pages/Blogs/Blogs';
 import Category from '../Pages/Categories/Category';
+import Allbuyers from '../Pages/DashBoard/ALlBuyers/Allbuyers';
 import AllUsers from '../Pages/DashBoard/AllUsers/AllUsers';
 import DashBoard from '../Pages/DashBoard/DashBoard/DashBoard';
 import Myorder from '../Pages/DashBoard/MyOrder/Myorder';
@@ -74,7 +75,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/sellers',
-                element: <AllSeller></AllSeller>
+                element: <AdminRoute><AllSeller></AllSeller></AdminRoute>
+            },
+            {
+                path: '/dashboard/buyers',
+                element: <AdminRoute><Allbuyers></Allbuyers></AdminRoute>
             }
         ]
     }
