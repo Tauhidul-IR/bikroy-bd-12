@@ -17,7 +17,7 @@ const Allbuyers = () => {
     const { data: buyers = [], refetch, isLoading } = useQuery({
         queryKey: [],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/buyers`);
+            const res = await fetch(`https://bikroy-bd-server.vercel.app/buyers`);
             const data = await res.json();
             const allBuyersData = data.filter(buyer => (buyer.userType !== 'Seller' && buyer.role !== 'admin'));
             console.log(allBuyersData);
@@ -28,7 +28,7 @@ const Allbuyers = () => {
 
     const handleDelete = user => {
         console.log(user)
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`https://bikroy-bd-server.vercel.app/users/${user._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

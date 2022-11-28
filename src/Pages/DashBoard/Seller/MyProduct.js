@@ -15,7 +15,7 @@ const MyProduct = () => {
     const { data: myProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['users', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/showAddProduct?email=${user?.email}`);
+            const res = await fetch(`https://bikroy-bd-server.vercel.app/showAddProduct?email=${user?.email}`);
             const data = await res.json();
             return data;
         }
@@ -28,7 +28,7 @@ const MyProduct = () => {
 
     const handleAdvertisement = product => {
         console.log(product);
-        fetch(`http://localhost:5000/advertise/${product?._id}`, {
+        fetch(`https://bikroy-bd-server.vercel.app/advertise/${product?._id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -51,7 +51,7 @@ const MyProduct = () => {
 
     const handleDelete = product => {
         console.log(product)
-        fetch(`http://localhost:5000/showAddProduct/${product._id}`, {
+        fetch(`https://bikroy-bd-server.vercel.app/showAddProduct/${product._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

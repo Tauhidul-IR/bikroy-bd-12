@@ -35,7 +35,7 @@ const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <PrivateRoute><Category></Category></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
+                loader: ({ params }) => fetch(`https://bikroy-bd-server.vercel.app/category/${params.id}`)
             },
             {
                 path: '/login',
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
             {
                 path: '/product/:id',
                 element: <ReportAdmin></ReportAdmin>,
-                loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
+                loader: ({ params }) => fetch(`https://bikroy-bd-server.vercel.app/product/${params.id}`)
             }
         ]
     },
@@ -96,7 +96,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader: ({ params }) => fetch(`http://localhost:5000/phoneBookings/${params.id}`)
+                loader: ({ params }) => fetch(`https://bikroy-bd-server.vercel.app/phoneBookings/${params.id}`)
             }
         ]
     }

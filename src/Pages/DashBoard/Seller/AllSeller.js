@@ -20,7 +20,7 @@ const AllSeller = () => {
     const { data: sellers = [], isLoading, refetch } = useQuery({
         queryKey: [],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/sellers?userType=Seller`)
+            const res = await fetch(`https://bikroy-bd-server.vercel.app/sellers?userType=Seller`)
             const data = await res.json();
             return data;
         }
@@ -31,14 +31,14 @@ const AllSeller = () => {
     }
 
     // useEffect(() => {
-    //     fetch(`http://localhost:5000/sellers?userType=Seller`)
+    //     fetch(`https://bikroy-bd-server.vercel.app/sellers?userType=Seller`)
     //         .then(res => res.json())
     //         .then(data => setSellers(data))
     // }, [users?.userType])
 
     const handleDelete = user => {
         console.log(user)
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`https://bikroy-bd-server.vercel.app/users/${user._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

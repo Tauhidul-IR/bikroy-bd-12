@@ -5,7 +5,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const OpenProductModal = ({ bookingProduct, setBookingProduct }) => {
     const { user } = useContext(AuthContext);
     const { battery, categoryName, color, img, location, name, newPrice, price, ram, size, usedYear } = bookingProduct;
-    console.log(bookingProduct);
+    console.log(name);
 
     const handleBooking = (event) => {
         event.preventDefault();
@@ -27,7 +27,7 @@ const OpenProductModal = ({ bookingProduct, setBookingProduct }) => {
             img
         }
 
-        fetch('http://localhost:5000/phoneBookings', {
+        fetch('https://bikroy-bd-server.vercel.app/phoneBookings', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -65,7 +65,7 @@ const OpenProductModal = ({ bookingProduct, setBookingProduct }) => {
                     <form onSubmit={handleBooking} className='grid grid-cols-1 gap-3 mt-10'>
                         <input name='userName' type="text" value={user?.displayName} disabled className="input input-bordered w-full" />
                         <input name='email' type="email" defaultValue={user?.email} readOnly placeholder="Your Name" className="input input-bordered w-full" />
-                        <input name='name' type="text" defaultValue={name} disabled placeholder="Email" className="input input-bordered w-full" />
+
                         <input name='price' type="text" defaultValue={price} disabled placeholder="Email" className="input input-bordered w-full" />
                         <input name='phone' type="text" placeholder="Phone Number" className="input input-bordered w-full" />
                         <input name='meetingLocation' type="text" placeholder="Meeting Location" className="input input-bordered w-full" />

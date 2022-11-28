@@ -21,7 +21,7 @@ const ReportAdmin = () => {
             report: data.report
         }
 
-        fetch('http://localhost:5000/reportAdmin', {
+        fetch('https://bikroy-bd-server.vercel.app/reportAdmin', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

@@ -11,7 +11,7 @@ const Adverting = () => {
     const { data: advertisedItems = [], isLoading, refetch } = useQuery({
         queryKey: [],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/advertisedProduct?productStatus=advertised`)
+            const res = await fetch(`https://bikroy-bd-server.vercel.app/advertisedProduct?productStatus=advertised`)
             const data = await res.json();
             return data;
         }

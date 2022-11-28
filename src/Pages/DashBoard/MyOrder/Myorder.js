@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 const Myorder = () => {
     const { user } = useContext(AuthContext);
 
-    const url = `http://localhost:5000/phoneBookings?email=${user?.email}`
+    const url = `https://bikroy-bd-server.vercel.app/phoneBookings?email=${user?.email}`
 
     const { data: phoneBookings = [], isLoading } = useQuery({
         queryKey: ['phoneBookings', user?.email],

@@ -18,7 +18,7 @@ const Category = () => {
     const { data: categoryService = [], isLoading } = useQuery({
         queryKey: ['categoryService', service?.category],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/allCategoryProducts?categoryName=${service?.category}`)
+            const res = await fetch(`https://bikroy-bd-server.vercel.app/allCategoryProducts?categoryName=${service?.category}`)
             const data = await res.json();
             return data;
         }

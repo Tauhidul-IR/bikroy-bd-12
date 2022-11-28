@@ -13,7 +13,7 @@ const HomeCategory = () => {
 
     // Use axios
     useEffect(() => {
-        axios.get('http://localhost:5000/category')
+        axios.get('https://bikroy-bd-server.vercel.app/category')
             .then((res) => {
                 setHomeCategory(res.data)
                 setIsLoading(false)

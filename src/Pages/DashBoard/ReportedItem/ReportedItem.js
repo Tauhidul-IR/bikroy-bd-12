@@ -13,7 +13,7 @@ const ReportedItem = () => {
     const { data: reportedItems = [], isLoading, refetch } = useQuery({
         queryKey: ['report'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/report`)
+            const res = await fetch(`https://bikroy-bd-server.vercel.app/report`)
             const data = await res.json();
             return data;
         }
@@ -25,7 +25,7 @@ const ReportedItem = () => {
 
     const handleDelete = item => {
         console.log(item)
-        fetch(`http://localhost:5000/deleteReportItem/${item.productID}`, {
+        fetch(`https://bikroy-bd-server.vercel.app/deleteReportItem/${item.productID}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -41,7 +41,7 @@ const ReportedItem = () => {
                 }
             })
 
-        fetch(`http://localhost:5000/deleteReport/${item._id}`, {
+        fetch(`https://bikroy-bd-server.vercel.app/deleteReport/${item._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
