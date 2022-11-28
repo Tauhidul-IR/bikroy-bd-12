@@ -2,17 +2,7 @@ import React from 'react';
 
 const SingleCategory = ({ singleCategory, setBookingProduct }) => {
     // console.log(singleCategory)
-    const { battery,
-        categoryName,
-        sellerImg,
-        color,
-        img,
-        location,
-        name,
-        newPrice,
-        price,
-        ram,
-        size, usedYear } = singleCategory;
+    const { sellerImg, sellerName, img, location, name, newPrice, price, usedYear, postDate } = singleCategory;
     return (
         <div>
             <div className="card w-96 bg-base-100 shadow-xl">
@@ -21,14 +11,22 @@ const SingleCategory = ({ singleCategory, setBookingProduct }) => {
                 </figure>
                 <div className="card-body items-center text-center">
                     <h2 className="card-title">{name}</h2>
-                    <p>Old Price : {price}</p>
-                    <p>Current price : {newPrice}</p>
+                    <p>Original Price : {price}</p>
+                    <p>Resell price : {newPrice}</p>
                     <p>Used Time : {usedYear} year</p>
                     <p>Location : {location}</p>
-                    <div className="avatar indicator">
-                        <span className="indicator-item badge badge-success"></span>
-                        <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                            <img src={sellerImg} alt='no img' />
+                    <p>Post Date : {postDate}</p>
+                    <div>
+                        <div className="avatar indicator my-3">
+                            <span className="indicator-item badge badge-success"></span>
+                            <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                <img src={sellerImg} alt='no img' />
+                            </div>
+                        </div>
+                        <div>
+                            {
+                                sellerName ? <h4>Seller : {sellerName}</h4> : <p>No Name</p>
+                            }
                         </div>
                     </div>
                     <div className="card-actions">
