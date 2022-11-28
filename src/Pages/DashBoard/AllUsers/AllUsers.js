@@ -22,7 +22,7 @@ const AllUsers = () => {
 
 
 
-    const handleDeleteUser = user => {
+    const handleDelete = user => {
         console.log(user)
         fetch(`http://localhost:5000/users/${user._id}`, {
             method: 'DELETE',
@@ -36,7 +36,7 @@ const AllUsers = () => {
                 if (data.deletedCount > 0) {
 
                     refetch();
-                    toast.success(`Doctor ${user.name} Delete SuccessFully`)
+                    toast.success(`Delete SuccessFully`)
                 }
             })
     }
@@ -54,7 +54,7 @@ const AllUsers = () => {
             .then(data => {
                 console.log(data)
                 if (data.modifiedCount > 0) {
-                    toast.success('Make admin successfully')
+                    toast.success('Make Seller successfully')
                     refetch();
                 }
             })
@@ -100,7 +100,7 @@ const AllUsers = () => {
                 </table>
             </div>
             {
-                deletingUser && <ConfirmModal title={`Are you want to delete?`} closeModal={closeModal} handleDeleteUser={handleDeleteUser} modalDAta={deletingUser}></ConfirmModal>
+                deletingUser && <ConfirmModal title={`Are you want to delete?`} closeModal={closeModal} handleDelete={handleDelete} modalDAta={deletingUser}></ConfirmModal>
             }
         </div>
     );

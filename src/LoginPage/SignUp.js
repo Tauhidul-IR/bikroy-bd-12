@@ -33,7 +33,7 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        saveUser(data.name, data.email, data.userType)
+                        saveUser(data.email, data.name, data.userType)
                         // navigate('/');
                     })
                     .catch(error => console.error(error))
@@ -45,8 +45,8 @@ const SignUp = () => {
     }
 
 
-    const saveUser = (name, email, userType) => {
-        const user = { name, email, userType };
+    const saveUser = (email, name, userType) => {
+        const user = { email, name, userType };
         fetch('http://localhost:5000/users', {
             method: "POST",
             headers: {
@@ -75,7 +75,7 @@ const SignUp = () => {
                 console.log(user)
                 // navigate(from, { replace: true })
                 toast.success("login Successfully")
-                setCreatedUserEmail(data.email)
+                saveUser(user.email)
             })
             .catch(error => {
                 console.log(error);

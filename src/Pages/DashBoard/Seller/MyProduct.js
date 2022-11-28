@@ -25,7 +25,7 @@ const MyProduct = () => {
 
     console.log(myProducts);
 
-    const handleDeleteUser = product => {
+    const handleDelete = product => {
         console.log(product)
         fetch(`http://localhost:5000/showAddProduct/${product._id}`, {
             method: 'DELETE',
@@ -109,7 +109,7 @@ const MyProduct = () => {
                 </table>
             </div>
             {
-                deletingProduct && <ConfirmModal title={`Are you want to delete?`} closeModal={closeModal} handleDeleteUser={handleDeleteUser} modalDAta={deletingProduct}></ConfirmModal>
+                deletingProduct && <ConfirmModal title={`Are you want to delete?`} closeModal={closeModal} handleDelete={handleDelete} modalDAta={deletingProduct}></ConfirmModal>
             }
         </div>
     );
