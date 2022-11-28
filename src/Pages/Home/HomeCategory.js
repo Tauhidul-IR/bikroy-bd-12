@@ -20,7 +20,7 @@ const HomeCategory = () => {
 
     return (
         <div>
-            <h2 className='text-5xl my-7 font-bold text-center'>You can select what you want..</h2>
+            <h2 className='text-5xl my-7 font-bold text-center'>You can select a Category</h2>
             <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-10 pl-5'>
                 {
                     homeCategory.map(hcategory => <div key={hcategory._id} className="card w-full md:w-96 bg-base-100 shadow-xl image-full">

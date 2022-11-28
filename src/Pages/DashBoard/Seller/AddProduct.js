@@ -53,7 +53,7 @@ const AddProduct = () => {
                         publishDate: data.publishDate,
                         categoryName: data.category,
                     }
-                    //save doctor to the DB
+
                     fetch('http://localhost:5000/addProduct', {
                         method: "POST",
                         headers: {

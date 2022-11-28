@@ -131,7 +131,7 @@ const Login = () => {
                 {/* -------------End Form-------------- */}
 
 
-                <p className='font-semibold my-5'>New to Doctors Portal? <Link to={'/signUp'} className='text-secondary'>Create new account</Link></p>
+                <p className='font-semibold my-5'>New to BikroyBD? <Link to={'/signUp'} className='text-secondary'>Create new account</Link></p>
                 <div className="divider">OR</div>
                 {/* -------------Google Login-------------- */}
                 <button onClick={handleGoogle} className='btn btn-outline w-full my-4'>CONTINUE WITH GOOGLE</button>
