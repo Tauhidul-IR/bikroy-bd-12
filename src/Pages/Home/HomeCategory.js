@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 const imgUrl = "https://www.cnet.com/a/img/resize/16553e1b4e4ed98372472ca87b76fb88fab86dd5/hub/2022/02/22/3c78d10e-30f2-4a56-9def-60455e08bf53/samsung-galaxy-s22-and-s22-plus-and-s22-ultra-compared-002-copy.jpg?auto=webp&fit=crop&height=1200&width=1200"
@@ -8,13 +9,14 @@ const imgUrl = "https://www.cnet.com/a/img/resize/16553e1b4e4ed98372472ca87b76fb
 const HomeCategory = () => {
     const [homeCategory, setHomeCategory] = useState([]);
 
-    // fetch()
+    // Use axios
     useEffect(() => {
-        fetch('http://localhost:5000/category')
-            .then(res => res.json())
-            .then(data => setHomeCategory(data))
+        axios.get('http://localhost:5000/category')
+            .then((res) => setHomeCategory(res.data))
+            .catch((error) => console.log(error.message))
     }, [])
     console.log(homeCategory)
+
 
 
 
