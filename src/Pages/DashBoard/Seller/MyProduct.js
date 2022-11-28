@@ -7,6 +7,7 @@ import { useQuery, } from '@tanstack/react-query'
 const MyProduct = () => {
     const { user } = useContext(AuthContext);
     const [deletingProduct, setDeletingProduct] = useState(null)
+    const [productStatus, setProductStatus] = useState('')
 
 
 
@@ -20,6 +21,24 @@ const MyProduct = () => {
     });
 
 
+    const handleAdvertisement = product => {
+        console.log(product);
+        fetch(`http://localhost:5000/advertise/${product?._id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.modifiedCount > 0) {
+                    toast.success('Advertised successfully')
+                    refetch();
+
+                }
+            })
+    }
 
 
 
@@ -92,10 +111,16 @@ const MyProduct = () => {
                                 </td>
                                 <td> {product?.price}</td>
                                 <td>
+
                                     <button className="btn btn-primary btn-xs">Available</button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-primary btn-xs">advertise</button>
+                                    {
+                                        product?.productStatus ?
+                                            <h2 className="btn  btn-xs text-success">advertised</h2>
+                                            :
+                                            <button onClick={() => handleAdvertisement(product)} className="btn btn-primary btn-xs">advertise</button>
+                                    }
                                 </td>
                                 <td>
                                     {/* The button to open modal */}
