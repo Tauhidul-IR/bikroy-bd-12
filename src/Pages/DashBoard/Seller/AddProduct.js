@@ -47,12 +47,15 @@ const AddProduct = () => {
                         name: data.name,
                         email: data.email,
                         img: imgData.data.url,
-                        price: data.price,
+                        newPrice: data.price,
                         condition: data.condition,
                         phone: data.phone,
-                        publishDate: data.publishDate,
+                        postDate: data.publishDate,
                         categoryName: data.category,
+                        sellerName: user?.displayName,
+                        location: data.location
                     }
+
 
                     fetch('http://localhost:5000/addProduct', {
                         method: "POST",
@@ -133,7 +136,19 @@ const AddProduct = () => {
                             required: "condition is Required"
                         })}
                         type="text" className="input input-bordered w-full max-w-xs" />
-                    {errors.price && <p className='text-red-500'>{errors.price?.message}</p>}
+                    {errors.condition && <p className='text-red-500'>{errors.condition?.message}</p>}
+                </div>
+                {/* --------------Condition---------------------------------- */}
+
+                {/* --------------Condition---------------------------------- */}
+                <div className="form-control w-full max-w-xs">
+                    <label className="label"><span className="label-text font-bold">Location</span></label>
+                    <input
+                        {...register("location", {
+                            required: "condition is Required"
+                        })}
+                        type="text" className="input input-bordered w-full max-w-xs" />
+                    {errors.location && <p className='text-red-500'>{errors.location?.message}</p>}
                 </div>
                 {/* --------------Condition---------------------------------- */}
 
