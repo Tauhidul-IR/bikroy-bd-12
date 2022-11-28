@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SingleCategory = ({ singleCategory, setBookingProduct }) => {
-    console.log(singleCategory)
+    // console.log(singleCategory)
     const { battery,
         categoryName,
         sellerImg,

@@ -24,6 +24,10 @@ const Category = () => {
         }
     })
 
+
+
+    console.log(categoryService);
+
     if (isLoading) {
         return <Loading></Loading>
     }
