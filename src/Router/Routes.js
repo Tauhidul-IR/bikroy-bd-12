@@ -11,6 +11,7 @@ import AllUsers from '../Pages/DashBoard/AllUsers/AllUsers';
 import DashBoard from '../Pages/DashBoard/DashBoard/DashBoard';
 import Myorder from '../Pages/DashBoard/MyOrder/Myorder';
 import Payment from '../Pages/DashBoard/Payment/Payment';
+import ReportedItem from '../Pages/DashBoard/ReportedItem/ReportedItem';
 import AddProduct from '../Pages/DashBoard/Seller/AddProduct';
 import AllSeller from '../Pages/DashBoard/Seller/AllSeller';
 import MyProduct from '../Pages/DashBoard/Seller/MyProduct';
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/buyers',
                 element: <AdminRoute><Allbuyers></Allbuyers></AdminRoute>
+            },
+            {
+                path: '/dashboard/reportedItem',
+                element: <AdminRoute><ReportedItem></ReportedItem></AdminRoute>
             },
             {
                 path: '/dashboard/payment/:id',
