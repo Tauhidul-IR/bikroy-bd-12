@@ -16,6 +16,7 @@ const ReportAdmin = () => {
     const handleReport = (data) => {
         const report = {
             productName: reportedProduct?.name,
+            productID: reportedProduct?._id,
             reporterEmail: user?.email,
             report: data.report
         }
