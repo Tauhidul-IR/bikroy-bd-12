@@ -74,7 +74,7 @@ const SignUp = () => {
                 const user = result.user;
                 console.log(user)
                 // navigate(from, { replace: true })
-                toast.success("login Successfully")
+                toast.success("SignUp Successfully")
                 saveUser(user.email)
             })
             .catch(error => {
@@ -139,7 +139,7 @@ const SignUp = () => {
 
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
-                            <span className="label-text">Select Type</span>
+                            <span className="label-text font-bold">Select Type</span>
 
                         </label>
                         <select {...register("userType")} className="select select-bordered">

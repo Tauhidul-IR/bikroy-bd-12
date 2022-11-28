@@ -59,29 +59,6 @@ const Login = () => {
 
 
 
-
-    // const saveUser = (name, email) => {
-    //     const user = { name, email };
-    //     fetch('http://localhost:5000/users', {
-    //         method: "POST",
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setLoginUserEmail(email)
-    //             // getUserToken(email)
-    //             // navigate('/');
-    //         })
-    //         .catch(error => console.error(error))
-    // }
-
-
-
-
-
     return (
         <div className='h-[800px] flex justify-center items-center'>
             <div className='w-96 p-7'>
@@ -105,7 +82,7 @@ const Login = () => {
 
 
                     {/* --------------password---------------------------------- */}
-                    <div className="form-control w-full max-w-xs">
+                    <div className="form-control w-full max-w-xs mb-4">
                         <label className="label"><span className="label-text font-bold">Password</span></label>
                         <input
                             {...register("password", {

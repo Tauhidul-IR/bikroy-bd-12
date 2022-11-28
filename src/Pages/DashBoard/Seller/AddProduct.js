@@ -84,8 +84,8 @@ const AddProduct = () => {
 
 
     return (
-        <div>
-            <h1>Add a product</h1>
+        <div className='mb-5'>
+            <h1 className='text-4xl font-bold my-7'>Add a product</h1>
             <form onSubmit={handleSubmit(handleAddProduct)}>
                 {/* --------------email---------------------------------- */}
                 <div className="form-control w-full max-w-xs">

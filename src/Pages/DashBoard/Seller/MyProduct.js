@@ -3,6 +3,7 @@ import { AuthContext } from '../../../Context/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
 import ConfirmModal from '../../../Shared/ComfirmModal/ConfirmModal';
 import { useQuery, } from '@tanstack/react-query'
+import Loading from '../../../Loading/Loading';
 
 const MyProduct = () => {
     const { user } = useContext(AuthContext);
@@ -11,7 +12,7 @@ const MyProduct = () => {
 
 
 
-    const { data: myProducts = [], refetch } = useQuery({
+    const { data: myProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['users', user?.email],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/showAddProduct?email=${user?.email}`);
@@ -19,6 +20,10 @@ const MyProduct = () => {
             return data;
         }
     });
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
 
     const handleAdvertisement = product => {
@@ -72,7 +77,7 @@ const MyProduct = () => {
 
     return (
         <div>
-            <h1>My Product</h1>
+            <h1 className='text-4xl font-bold my-7'>My Product</h1>
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
 
