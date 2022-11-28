@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SingleCategory = ({ singleCategory, setBookingProduct }) => {
     // console.log(singleCategory)
-    const { sellerImg, sellerName, img, location, name, newPrice, price, usedYear, postDate } = singleCategory;
+    const { _id, sellerImg, sellerName, img, location, name, newPrice, price, usedYear, postDate } = singleCategory;
     return (
         <div>
             <div className="card w-96 bg-base-100 shadow-xl">
@@ -33,6 +34,7 @@ const SingleCategory = ({ singleCategory, setBookingProduct }) => {
                         {/* The button to open modal */}
                         <label htmlFor="BookingProductModal" className="btn btn-primary" onClick={() => setBookingProduct(singleCategory)} >Book now</label>
                     </div>
+                    <Link to={`/product/${_id}`} className="btn btn-active btn-link text-red-600">Report to admin</Link>
                 </div>
             </div>
         </div>

@@ -16,6 +16,7 @@ import AllSeller from '../Pages/DashBoard/Seller/AllSeller';
 import MyProduct from '../Pages/DashBoard/Seller/MyProduct';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/Home/Home';
+import ReportAdmin from '../Pages/ReportAdmin/ReportAdmin';
 import AdminRoute from './AdminRoute';
 import PrivateRoute from './PrivateRoute';
 import SellerRoute from './SellerRoute';
@@ -46,6 +47,11 @@ const router = createBrowserRouter([
             {
                 path: '/blogs',
                 element: <Blogs></Blogs>
+            },
+            {
+                path: '/product/:id',
+                element: <ReportAdmin></ReportAdmin>,
+                loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
             }
         ]
     },
