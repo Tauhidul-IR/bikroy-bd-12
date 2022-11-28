@@ -91,7 +91,14 @@ const AllUsers = () => {
                                 <td>
 
                                     {/* The button to open modal */}
-                                    <label onClick={() => { setDeletingUser(user) }} htmlFor="confirmation-modal" className="btn btn-danger">X</label>
+                                    {
+                                        user?.role === 'admin' ?
+                                            <div className="tooltip" data-tip="Unable to Delete">
+                                                <h2 className="text-success font-bold">Admin</h2>
+                                            </div>
+                                            :
+                                            <label onClick={() => { setDeletingUser(user) }} htmlFor="confirmation-modal" className="btn btn-danger">X</label>
+                                    }
                                 </td>
 
                             </tr>)
