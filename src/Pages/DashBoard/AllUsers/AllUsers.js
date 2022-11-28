@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, } from '@tanstack/react-query'
 import toast, { Toaster } from 'react-hot-toast';
 import ConfirmModal from '../../../Shared/ComfirmModal/ConfirmModal';
+import Loading from '../../../Loading/Loading';
 
 const AllUsers = () => {
     const [deletingUser, setDeletingUser] = useState(null)
@@ -11,7 +12,7 @@ const AllUsers = () => {
     }
 
 
-    const { data: users = [], refetch } = useQuery({
+    const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/users');
@@ -20,6 +21,9 @@ const AllUsers = () => {
         }
     });
 
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
 
     const handleDelete = user => {
@@ -64,7 +68,7 @@ const AllUsers = () => {
 
     return (
         <div>
-            <h2 className="text-2xl">ALl User</h2>
+            <h2 className="text-2xl font-bold my-6">ALl User</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">
 
