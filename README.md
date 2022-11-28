@@ -1,3 +1,34 @@
+This is a Simple resell products website.
+Website Name : Bikroy-BD
+WebsiteLink: 
+admin-name: admin@admin.com
+admin-password: admin@admin.com
+
+
+
+* we use react app for create website
+* We also use firebase for Authentication
+* Use MongoDB for Database
+* Use Stripe for payment method
+* Add JWT for verify Admin ,seller
+* Some use of AXIOS and TangStack Query
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
