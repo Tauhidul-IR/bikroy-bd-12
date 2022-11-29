@@ -20,16 +20,12 @@ const Login = () => {
         navigate(from, { replace: true })
     }
 
-
-
     const handleLogin = data => {
-        // console.log(data)
         setLoginError('');
         loginUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 setLoginUserEmail(data.email)
-                navigate('/')
 
             })
             .catch(error => {
@@ -44,10 +40,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                // navigate(from, { replace: true })
                 toast.success("login Successfully")
-                // setLoginUserEmail(user?.email)
-                setLoginUserEmail(user.email)
                 navigate('/')
             })
             .catch(error => {

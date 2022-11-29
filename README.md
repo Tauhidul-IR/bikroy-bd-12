@@ -1,6 +1,6 @@
 This is a Simple resell products website.
 Website Name : Bikroy-BD
-WebsiteLink: 
+WebsiteLink: https://bikroybd-8102c.web.app/
 admin-name: admin@admin.com
 admin-password: admin@admin.com
 

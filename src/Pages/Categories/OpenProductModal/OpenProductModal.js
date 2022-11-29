@@ -66,7 +66,7 @@ const OpenProductModal = ({ bookingProduct, setBookingProduct }) => {
                         <input name='userName' type="text" value={user?.displayName} disabled className="input input-bordered w-full" />
                         <input name='email' type="email" defaultValue={user?.email} readOnly placeholder="Your Name" className="input input-bordered w-full" />
 
-                        <input name='price' type="text" defaultValue={price} disabled placeholder="Email" className="input input-bordered w-full" />
+                        <input name='price' type="text" defaultValue={price} disabled placeholder="Price" className="input input-bordered w-full" />
                         <input name='phone' type="text" placeholder="Phone Number" className="input input-bordered w-full" />
                         <input name='meetingLocation' type="text" placeholder="Meeting Location" className="input input-bordered w-full" />
                         <br />
