@@ -18,6 +18,7 @@ import MyProduct from '../Pages/DashBoard/Seller/MyProduct';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/Home/Home';
 import ReportAdmin from '../Pages/ReportAdmin/ReportAdmin';
+import ResetPassword from '../Pages/ResetPassword/ResetPassword';
 import AdminRoute from './AdminRoute';
 import PrivateRoute from './PrivateRoute';
 import SellerRoute from './SellerRoute';
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
             {
                 path: '/signUp',
                 element: <SignUp></SignUp>
+            },
+            {
+                path: '/resetPassword',
+                element: <ResetPassword></ResetPassword>
             },
             {
                 path: '/blogs',

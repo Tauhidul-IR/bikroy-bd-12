@@ -85,7 +85,11 @@ const Login = () => {
                             type="password" className="input input-bordered w-full max-w-xs" />
                         {errors.password && <p className='text-red-700'>{errors.password?.message}</p>}
 
+
+
+                        <label className="label "><Link to={'/resetPassword'} className="label-text text-red-500 font-bold">Forget Password</Link></label>
                     </div>
+
                     {/* --------------password---------------------------------- */}
 
 
