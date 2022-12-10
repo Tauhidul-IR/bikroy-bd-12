@@ -55,6 +55,9 @@ const Login = () => {
     return (
         <div className='h-[800px] flex justify-center items-center'>
             <div className='w-96 p-7'>
+                <h3 className='text-center text-red-500'>For check Dashboard/admin panel login with <br />
+                    user : admin@admin.com <br />
+                    password : admin@admin.com</h3>
                 <h2 className='text-xl text-center font-bold'>Login</h2>
                 {/* -----------------Start Form------------------ */}
                 <form onSubmit={handleSubmit(handleLogin)}>
