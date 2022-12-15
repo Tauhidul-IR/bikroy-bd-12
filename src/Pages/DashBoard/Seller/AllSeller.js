@@ -68,7 +68,6 @@ const AllSeller = () => {
                             <th></th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Action</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -78,11 +77,7 @@ const AllSeller = () => {
                                 <th>{i + 1}</th>
                                 <td>{seller?.name}</td>
                                 <td>{seller?.email}</td>
-                                <td>
 
-                                    <button className='btn btn-primary'>verify</button>
-
-                                </td>
                                 {/* The button to open modal */}
                                 <label onClick={() => { setDeletigSeller(seller) }} htmlFor="confirmation-modal" className="btn btn-danger btn-sm mt-2">X</label>
 
