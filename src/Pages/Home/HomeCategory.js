@@ -30,12 +30,12 @@ const HomeCategory = () => {
     return (
         <div>
             <h2 className='text-5xl my-7 font-bold text-center'>You can select a Category</h2>
-            <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-10 pl-5'>
+            <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-10 md:pl-5'>
                 {
                     homeCategory.map(hcategory => <div key={hcategory._id} className="card w-full md:w-96 bg-base-100 shadow-xl image-full">
                         <figure><img src={imgUrl} alt="Shoes" /></figure>
                         <div className="card-body">
-                            <h2 className="card-title text-5xl">{hcategory.category}</h2>
+                            <h2 className="card-title text-5xl justify-center">{hcategory.category}</h2>
                             <p className='text-xl'>All the 2nd hand {hcategory.category} Phone you find here</p>
                             <div className="card-actions justify-center">
                                 <Link to={`/category/${hcategory._id}`} className="btn btn-primary">See ALl</Link>

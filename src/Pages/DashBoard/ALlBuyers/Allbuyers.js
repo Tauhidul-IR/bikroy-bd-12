@@ -55,7 +55,7 @@ const Allbuyers = () => {
     return (
         <div>
             <h1 className='text-3xl font-bold my-7'>All Buyers</h1>
-            <div className="overflow-x-auto">
+            {/* <div className="overflow-x-auto">
                 <table className="table w-full">
 
                     <thead>
@@ -73,13 +73,34 @@ const Allbuyers = () => {
                                 <td>{buyer?.name}</td>
                                 <td>{buyer?.email}</td>
 
-                                {/* The button to open modal */}
+                                
                                 <label onClick={() => { setDeletingUser(buyer) }} htmlFor="confirmation-modal" className="btn btn-danger">X</label>
 
                             </tr>)
                         }
                     </tbody>
                 </table>
+            </div> */}
+
+
+            <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-10 '>
+                {
+                    buyers.map(buyer => <div key={buyer._id} className="card w-full md:w-80 bg-base-100 shadow-xl">
+                        <div className="card-body">
+                            <h2 className="card-title">
+                                Name : {buyer?.name}
+                            </h2>
+                            <p>Email : {buyer?.email}</p>
+                            <div className="card-actions justify-end">
+                                <label onClick={() => { setDeletingUser(buyer) }} htmlFor="confirmation-modal" className="btn btn-xs btn-primary">Delete</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    )
+
+                }
+
             </div>
             {
                 deletingUser && <ConfirmModal title={`Are you want to delete?`} closeModal={closeModal} handleDelete={handleDelete} modalDAta={deletingUser}></ConfirmModal>

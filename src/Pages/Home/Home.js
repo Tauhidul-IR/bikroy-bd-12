@@ -6,7 +6,7 @@ import Subscribe from './Subscribe';
 
 const Home = () => {
     return (
-        <div>
+        <div className='px-4'>
             <Banner></Banner>
             <Adverting></Adverting>
             <HomeCategory></HomeCategory>

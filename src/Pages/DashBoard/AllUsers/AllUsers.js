@@ -69,47 +69,40 @@ const AllUsers = () => {
     return (
         <div>
             <h2 className="text-2xl font-bold my-6">ALl User</h2>
-            <div className="overflow-x-auto">
-                <table className="table w-full">
 
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Status</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            users.map((user, i) => <tr key={user._id}>
-                                <th>{i + 1}</th>
-                                <td>{user?.name}</td>
-                                <td>{user?.email}</td>
-                                <td>
-                                    {
-                                        user?.userType !== "Seller" && user?.role !== "admin" && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary'>Make Seller</button>
-                                    }
-                                </td>
-                                <td>
+            <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-10 '>
+                {
+                    users.map(user => <div key={user._id} className="card w-full md:w-80 bg-base-100 shadow-xl">
+                        <div className="card-body">
+                            <h2 className="card-title">
+                                Name : {user?.name}
+                            </h2>
+                            <p>Email : {user?.email}</p>
+                            <div className="card-actions justify-end">
+                                {
+                                    user?.userType !== "Seller" && user?.role !== "admin" && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary'>Make Seller</button>
+                                }
+                                {
+                                    user?.role === 'admin' ?
+                                        <div className="tooltip" data-tip="Unable to Delete">
+                                            <h2 className="text-success font-bold">Admin</h2>
+                                        </div>
+                                        :
+                                        <label onClick={() => { setDeletingUser(user) }} htmlFor="confirmation-modal" className="btn btn-xs btn-primary">Delete</label>
+                                }
+                            </div>
+                        </div>
+                    </div>
 
-                                    {/* The button to open modal */}
-                                    {
-                                        user?.role === 'admin' ?
-                                            <div className="tooltip" data-tip="Unable to Delete">
-                                                <h2 className="text-success font-bold">Admin</h2>
-                                            </div>
-                                            :
-                                            <label onClick={() => { setDeletingUser(user) }} htmlFor="confirmation-modal" className="btn btn-danger">X</label>
-                                    }
-                                </td>
+                    )
 
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
+                }
+
             </div>
+
+
+
+
             {
                 deletingUser && <ConfirmModal title={`Are you want to delete?`} closeModal={closeModal} handleDelete={handleDelete} modalDAta={deletingUser}></ConfirmModal>
             }

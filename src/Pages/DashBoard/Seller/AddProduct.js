@@ -226,7 +226,7 @@ const AddProduct = () => {
 
 
                 {/* --------------Submit Btn---------------------------------- */}
-                <input className='btn btn-neutral mt-5' type="submit" value={'Add Product'} />
+                <input className='btn btn-primary mt-5' type="submit" value={'Add Product'} />
                 {/* display Error */}
                 <div>
                     {

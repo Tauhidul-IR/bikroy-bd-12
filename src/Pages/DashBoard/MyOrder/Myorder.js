@@ -8,6 +8,7 @@ import {
     QueryClientProvider,
 } from '@tanstack/react-query'
 import { Link } from 'react-router-dom';
+import Loading from '../../../Loading/Loading';
 // import Loading from '../../Loading/Loading';
 
 const Myorder = () => {
@@ -29,65 +30,46 @@ const Myorder = () => {
 
     })
 
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+
     console.log(phoneBookings);
 
     return (
         <div>
             <h1 className='text-3xl font-bold my-5'>My Orders</h1>
 
-            <div className="overflow-x-auto w-full">
-                <table className="table w-full">
 
-                    <thead>
-                        <tr>
-                            <th>
-                                index
-                            </th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-10 '>
+                {
+                    phoneBookings &&
+                    phoneBookings.map(bookingPhone => <div key={bookingPhone._id} className="card w-full md:w-80 bg-base-100 shadow-xl">
+                        <figure><img className='w-28 pt-7' src={bookingPhone?.img} alt="Avatar Tailwind CSS Component" /></figure>
+                        <div className="card-body">
+                            <h2 className="card-title">
+                                Name : {bookingPhone?.name}
+                            </h2>
+                            <p>Email : {bookingPhone?.email}</p>
+                            <div className="card-actions justify-end">
+                                {
+                                    !bookingPhone?.paid && <Link to={`/dashboard/payment/${bookingPhone._id}`}>
+                                        <button className='btn btn-primary btn-sm'>
+                                            Pay
+                                        </button>
+                                    </Link>
+                                }
+                                {
+                                    bookingPhone?.paid && <span className='text-primary'>Paid</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
 
+                    )
 
-                        {
-                            phoneBookings &&
-                            phoneBookings.map((bookingPhone, i) => <tr key={bookingPhone._id}>
-                                <td>{i + 1}</td>
-                                <td>
-                                    <div className="flex items-center space-x-3">
-                                        <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
-                                                <img src={bookingPhone?.img} alt="Avatar Tailwind CSS Component" />
-                                            </div>
-                                        </div>
+                }
 
-                                    </div>
-                                </td>
-                                <td>
-                                    {bookingPhone?.name}
-                                </td>
-                                <td> {bookingPhone?.price}</td>
-                                <th>
-                                    {
-                                        !bookingPhone?.paid && <Link to={`/dashboard/payment/${bookingPhone._id}`}>
-                                            <button className='btn btn-primary btn-sm'>
-                                                Pay
-                                            </button>
-                                        </Link>
-                                    }
-                                    {
-                                        bookingPhone?.paid && <span className='text-primary'>Paid</span>
-                                    }
-                                </th>
-                            </tr>)
-                        }
-                    </tbody>
-
-
-                </table>
             </div>
         </div>
     );

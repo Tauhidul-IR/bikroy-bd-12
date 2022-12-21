@@ -72,12 +72,12 @@ const ReportedItem = () => {
 
 
                 {
-                    reportedItems.map(item => <div className="card w-60 text-black border">
+                    reportedItems.map(item => <div className="card w-72 text-black border">
                         <div className="card-body">
                             <h2 className="card-title">Report on {item?.productName}</h2>
                             <p>{item?.report}</p>
                             <div className="card-actions justify-end">
-                                <label onClick={() => { setDeletingProduct(item) }} htmlFor="confirmation-modal" className="btn btn-danger">Delete Item</label>
+                                <label onClick={() => { setDeletingProduct(item) }} htmlFor="confirmation-modal" className="btn btn-xs btn-primary">Delete Item</label>
                             </div>
                         </div>
                     </div>)

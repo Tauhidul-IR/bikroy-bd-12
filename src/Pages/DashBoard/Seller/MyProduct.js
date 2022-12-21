@@ -78,7 +78,7 @@ const MyProduct = () => {
     return (
         <div>
             <h1 className='text-4xl font-bold my-7'>My Product</h1>
-            <div className="overflow-x-auto w-full">
+            {/* <div className="overflow-x-auto w-full">
                 <table className="table w-full">
 
                     <thead>
@@ -128,7 +128,7 @@ const MyProduct = () => {
                                     }
                                 </td>
                                 <td>
-                                    {/* The button to open modal */}
+                                    
                                     <label onClick={() => { setDeletingProduct(product) }} htmlFor="confirmation-modal" className="btn btn-danger">X</label>
                                 </td>
                             </tr>)
@@ -137,6 +137,36 @@ const MyProduct = () => {
 
 
                 </table>
+            </div> */}
+
+            <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-10 '>
+                {
+                    myProducts &&
+                    myProducts.map(product => <div key={product._id} className="card w-full md:w-80 bg-base-100 shadow-xl">
+                        <figure><img className='w-28 pt-7' src={product?.img} alt="Avatar Tailwind CSS Component" /></figure>
+                        <div className="card-body">
+                            <h2 className="card-title">
+                                Name : {product?.name}
+                            </h2>
+                            <p>Email : {product?.email}</p>
+                            <div className="card-actions justify-center">
+                                <label htmlFor="confirmation-modal" className="btn btn-xs btn-primary">Available</label>
+                                {
+                                    product?.productStatus ?
+                                        <h2 className="btn  btn-xs text-success">advertised</h2>
+                                        :
+                                        <button onClick={() => handleAdvertisement(product)} className="btn btn-primary btn-xs">advertise</button>
+                                }
+                                <label onClick={() => { setDeletingProduct(product) }} htmlFor="confirmation-modal" className="btn btn-xs btn-primary">Delete</label>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    )
+
+                }
+
             </div>
             {
                 deletingProduct && <ConfirmModal title={`Are you want to delete?`} closeModal={closeModal} handleDelete={handleDelete} modalDAta={deletingProduct}></ConfirmModal>

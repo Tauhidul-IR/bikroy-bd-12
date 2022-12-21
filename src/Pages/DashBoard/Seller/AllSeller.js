@@ -60,32 +60,27 @@ const AllSeller = () => {
     return (
         <div>
             <h1 className="text-2xl font-bold my-6">All Sellers</h1>
-            <div className="overflow-x-auto">
-                <table className="table w-full">
 
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            sellers.map((seller, i) => <tr key={seller._id}>
-                                <th>{i + 1}</th>
-                                <td>{seller?.name}</td>
-                                <td>{seller?.email}</td>
+            <div className='grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-10 '>
+                {
+                    sellers.map(seller => <div key={seller._id} className="card w-full md:w-80 bg-base-100 shadow-xl">
+                        <div className="card-body">
+                            <h2 className="card-title">
+                                Name : {seller?.name}
+                            </h2>
+                            <p>Email : {seller?.email}</p>
+                            <div className="card-actions justify-end">
+                                <label onClick={() => { setDeletigSeller(seller) }} htmlFor="confirmation-modal" className="btn btn-xs btn-primary mt-2">Delete</label>
+                            </div>
+                        </div>
+                    </div>
 
-                                {/* The button to open modal */}
-                                <label onClick={() => { setDeletigSeller(seller) }} htmlFor="confirmation-modal" className="btn btn-danger btn-sm mt-2">X</label>
+                    )
 
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
+                }
+
             </div>
+
             {
                 deletingSeller && <ConfirmModal title={`Are you want to delete?`} closeModal={closeModal} handleDelete={handleDelete} modalDAta={deletingSeller}></ConfirmModal>
             }
