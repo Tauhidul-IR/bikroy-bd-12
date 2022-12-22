@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const useToken = email => {
     const [token, setToken] = useState('')
+    const navigate = useNavigate();
     useEffect(() => {
         if (email) {
             fetch(`https://bikroy-bd-server.vercel.app/jwt?email=${email}`)
@@ -10,7 +13,7 @@ const useToken = email => {
                     if (data.accessToken) {
                         localStorage.setItem('accessToken', data.accessToken)
                         setToken(data.accessToken)
-                        // navigate('/');
+                        navigate('/');
                     }
                 });
         }
